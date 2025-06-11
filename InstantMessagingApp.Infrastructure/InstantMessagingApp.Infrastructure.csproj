@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\InstantMessagingApp.Application\InstantMessagingApp.Application.csproj" />
+      <ProjectReference Include="..\InstantMessagingApp.Domain\InstantMessagingApp.Domain.csproj" />
+    </ItemGroup>
+
+</Project>
