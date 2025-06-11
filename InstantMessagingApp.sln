@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantMessagingApp.WebApi", "InstantMessagingApp.WebApi\InstantMessagingApp.WebApi.csproj", "{176BD4B3-58CC-47E8-BB95-D0A062DFB394}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantMessagingApp.Domain", "InstantMessagingApp.Domain\InstantMessagingApp.Domain.csproj", "{5ECDF1A3-0E55-468C-B4EF-667D585EAE88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantMessagingApp.Infrastructure", "InstantMessagingApp.Infrastructure\InstantMessagingApp.Infrastructure.csproj", "{31A2EFF5-08DC-4D90-BF8D-F9B51C72308B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantMessagingApp.Application", "InstantMessagingApp.Application\InstantMessagingApp.Application.csproj", "{002DA453-4039-4291-B9EE-ED6AE94843E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{176BD4B3-58CC-47E8-BB95-D0A062DFB394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{176BD4B3-58CC-47E8-BB95-D0A062DFB394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{176BD4B3-58CC-47E8-BB95-D0A062DFB394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{176BD4B3-58CC-47E8-BB95-D0A062DFB394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ECDF1A3-0E55-468C-B4EF-667D585EAE88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ECDF1A3-0E55-468C-B4EF-667D585EAE88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ECDF1A3-0E55-468C-B4EF-667D585EAE88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ECDF1A3-0E55-468C-B4EF-667D585EAE88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31A2EFF5-08DC-4D90-BF8D-F9B51C72308B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A2EFF5-08DC-4D90-BF8D-F9B51C72308B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A2EFF5-08DC-4D90-BF8D-F9B51C72308B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A2EFF5-08DC-4D90-BF8D-F9B51C72308B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{002DA453-4039-4291-B9EE-ED6AE94843E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{002DA453-4039-4291-B9EE-ED6AE94843E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{002DA453-4039-4291-B9EE-ED6AE94843E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{002DA453-4039-4291-B9EE-ED6AE94843E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
