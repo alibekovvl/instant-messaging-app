@@ -3,5 +3,5 @@
 public interface IUserService
 {
     void Register(string username, string password);
-    void Login(string username, string password);
+    string Login(string username, string password);
 }

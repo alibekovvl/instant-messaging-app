@@ -2,10 +2,12 @@
 using InstantMessagingApp.Domain.Entities;
 using InstantMessagingApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
-
+    
 namespace InstantMessagingApp.Infrastructure.Services;
 
-public class UserService(UserRepository userRepository): IUserService
+public class UserService(
+    IUserRepository userRepository,
+    JwtService jwtService): IUserService
 {
     public void Register(string userName, string password)
     {
@@ -19,7 +21,7 @@ public class UserService(UserRepository userRepository): IUserService
         account.PasswordHash = hashPassword;    
         userRepository.Add(account);
     }
-    public void Login(string username, string password)
+    public string Login(string username, string password)
     {
         var account = userRepository.GetByUsername(username);
         var result = new PasswordHasher<User>()
@@ -27,7 +29,8 @@ public class UserService(UserRepository userRepository): IUserService
         
         if (result == PasswordVerificationResult.Success)
         {
-            //generate token
+            return jwtService.GenerateToken(account);
+            
         }
         else
         {

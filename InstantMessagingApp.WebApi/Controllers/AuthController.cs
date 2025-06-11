@@ -1,4 +1,5 @@
 ﻿using InstantMessagingApp.Application.DTOs;
+using InstantMessagingApp.Application.Interfaces;
 using InstantMessagingApp.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace InstantMessagingApp.Controllers;
 [ApiController]
 [Route("[controller]")]
 
-public class AuthController(UserService userService) : ControllerBase
+public class AuthController(IUserService userService) : ControllerBase
 {
     [HttpPost("register")]
     public IActionResult Register([FromBody] RegisterUserRequest request)
@@ -15,17 +16,15 @@ public class AuthController(UserService userService) : ControllerBase
         userService.Register(request.Username, request.Password);
         return NoContent();
     }
-
     [HttpPost("login")]
-
     public IActionResult Login([FromBody] LoginUserRequest request)
     {
         try
         {
-            userService.Login(request.Username, request.Password);
-            return Ok();
+            var token = userService.Login(request.Username, request.Password);
+            return Ok(token);
         }
-        catch (Exception e)
+        catch 
         {
             return Unauthorized();
         }
