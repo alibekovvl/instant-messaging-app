@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace InstantMessagingApp.Infrastructure.Extentions;
+namespace InstantMessagingApp.Infrastructure.Extensions;
 
 public static class SwaggerExtensions
 {

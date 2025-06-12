@@ -1,19 +1,20 @@
 ﻿using InstantMessagingApp.Application.Interfaces;
 using InstantMessagingApp.Domain.Entities;
+using InstantMessagingApp.Infrastructure.Data;
 
 namespace InstantMessagingApp.Infrastructure.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository(AppDbContext dbContext) : IUserRepository
 {
-    private static IDictionary<string, User> Users = new Dictionary<string, User>();
-
+    private readonly AppDbContext _dbContext = dbContext;
     public void Add(User account)
     {
-        Users[account.Username] = account;
+        _dbContext.Users.Add(account);
+        _dbContext.SaveChanges();
     }
     public User? GetByUsername(string username)
     {
-        return Users.TryGetValue(username, out var account) ? account : null;
+        return _dbContext.Users.FirstOrDefault(u => u.Username == username);
     }
     
 }

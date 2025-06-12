@@ -1,6 +1,6 @@
 using InstantMessagingApp.Application.Interfaces;
 using InstantMessagingApp.Infrastructure.Data;
-using InstantMessagingApp.Infrastructure.Extentions;
+using InstantMessagingApp.Infrastructure.Extensions;
 using InstantMessagingApp.Infrastructure.Repositories;
 using InstantMessagingApp.Infrastructure.Services;
 using InstantMessagingApp.Infrastructure.Services.SignalR;
@@ -10,7 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+var connectionString = builder.Configuration["DEFAULT_CONNECTION"]
+                       ?? builder.Configuration.GetConnectionString("DefaultConnection");
+    
+Console.WriteLine("CONNECTION STRING: " + connectionString);
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
@@ -27,7 +32,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 app.UseCors();
 app.MapHub<ChatHub>("/chathub");
 app.UseAuthentication();

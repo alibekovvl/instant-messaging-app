@@ -5,7 +5,7 @@ using InstantMessagingApp.Infrastructure.Services.SignalR;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace InstantMessagingApp.Infrastructure.Extentions;
+namespace InstantMessagingApp.Infrastructure.Extensions;
 
 public static class DependencyInjectionExtensions
 {
