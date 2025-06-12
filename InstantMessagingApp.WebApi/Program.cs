@@ -10,8 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<JwtService>();
-builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings")); 
-
+builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
+builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -21,5 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();
