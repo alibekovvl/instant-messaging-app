@@ -1,11 +1,9 @@
-﻿namespace InstantMessagingApp.Domain.Entities;
+﻿namespace InstantMessagingApp.Application.DTOs;
 
-public class Message
+public class MessageDto
 {
-    public Guid Id { get; set; }
     public string Sender { get; set; }
     public string Receiver { get; set; }
     public string Content { get; set; }
     public DateTime SentAt { get; set; }
-   // public bool IsRead { get; set; }    
 }

@@ -7,8 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
-builder.Services.AddScoped<IUserRepository,UserRepository>();
-builder.Services.AddScoped<IUserService,UserService>();
+builder.Services
+    .AddScoped<IUserRepository,UserRepository>()
+    .AddScoped<IUserService,UserService>()
+    .AddScoped<IMessageRepository,MessageRepository>()
+    .AddScoped<IMessageService, MessageService>();
+
 builder.Services.AddScoped<JwtService>();
 builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
 builder.Services.AddAuth(builder.Configuration);
