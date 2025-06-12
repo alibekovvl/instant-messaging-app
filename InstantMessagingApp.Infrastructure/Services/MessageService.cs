@@ -19,4 +19,16 @@ public class MessageService(IMessageRepository repository): IMessageService
         };
         repository.Add(message);
     }
+
+    public IEnumerable<MessageDto> GetContent(string user1, string user2)
+    {
+        return repository.GetContent(user1, user2)
+            .Select(m => new MessageDto
+            {
+                Sender = m.Sender,
+                Receiver = m.Receiver,
+                Content = m.Content,
+                SentAt = m.SentAt
+            });
+    }
 }

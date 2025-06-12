@@ -14,10 +14,20 @@ public class MessageController(IMessageService service) : ControllerBase
     [HttpPost("send")]
     public IActionResult SendMessage([FromBody] SendMessageRequest request)
     {
-        var reciever = User.FindFirst("username")?.Value;
+        var reciever = User.FindFirst("userName")?.Value;
         if (request == null) return Unauthorized();
         
         service.SendMessage(reciever, request); 
         return Ok();
+    }
+
+    [HttpGet("{username}")]
+    public IActionResult GetMessages(string username)
+    {
+        var currentUsername = User.FindFirst("userName")?.Value;
+        if (currentUsername == null) return Unauthorized();
+        var messages = service.GetContent(currentUsername, username);
+        return Ok(messages);
+        
     }
 }

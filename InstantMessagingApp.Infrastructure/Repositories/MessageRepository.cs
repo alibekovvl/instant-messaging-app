@@ -11,5 +11,14 @@ public class MessageRepository: IMessageRepository
     {
         messages.Add(message);    
     }
+
+    public IEnumerable<Message> GetContent(string user1, string user2)
+    {
+        return messages
+            .Where(m => 
+                (m.Sender == user1 && m.Sender == user2) ||
+                (m.Sender == user2 && m.Sender == user1))
+            .OrderBy(m => m.SentAt);
+    }
     
 }
