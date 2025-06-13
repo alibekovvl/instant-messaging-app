@@ -1,20 +1,21 @@
 ﻿using InstantMessagingApp.Application.Interfaces;
 using InstantMessagingApp.Domain.Entities;
 using InstantMessagingApp.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace InstantMessagingApp.Infrastructure.Repositories;
 
 public class UserRepository(AppDbContext dbContext) : IUserRepository
 {
     private readonly AppDbContext _dbContext = dbContext;
-    public void Add(User account)
+    public async Task AddAsync(User account)
     {
-        _dbContext.Users.Add(account);
-        _dbContext.SaveChanges();
+        await _dbContext.Users.AddAsync(account);
+        await _dbContext.SaveChangesAsync();
     }
-    public User? GetByUsername(string username)
+    public async Task<User?> GetByUsernameAsync(string username)
     {
-        return _dbContext.Users.FirstOrDefault(u => u.Username == username);
+        return await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
     }
     
 }

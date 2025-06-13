@@ -4,6 +4,7 @@ namespace InstantMessagingApp.Application.Interfaces;
 
 public interface IMessageRepository
 {
-    void Add(Message message);
-    IEnumerable<Message> GetContent(string user1, string user2);
+    Task AddAsync(Message message);
+    Task<IEnumerable<Message>> GetContentAsync(string user1, string user2);
+    Task<List<Message>> GetMessagesBetweenUsersAsync(string user1, string user2);
 }

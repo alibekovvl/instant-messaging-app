@@ -12,8 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration["DEFAULT_CONNECTION"]
                        ?? builder.Configuration.GetConnectionString("DefaultConnection");
-    
-Console.WriteLine("CONNECTION STRING: " + connectionString);
+
+var botToken = builder.Configuration["Telegram:BotToken"];
+builder.Services.AddSingleton<ITelegramNotificationService, TelegramNotificationService>
+    (provider => new TelegramNotificationService(botToken));
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddEndpointsApiExplorer();

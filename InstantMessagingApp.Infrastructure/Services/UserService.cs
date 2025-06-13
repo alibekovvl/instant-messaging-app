@@ -9,7 +9,7 @@ public class UserService(
     IUserRepository userRepository,
     JwtService jwtService): IUserService
 {
-    public void Register(string userName, string password)
+    public async Task Register(string userName, string password)
     {
         var account = new User()
         {
@@ -17,9 +17,9 @@ public class UserService(
             Id = Guid.NewGuid()
         };
 
-        var hashPassword = new PasswordHasher<User>().HashPassword(account, password);
+        var hashPassword = await new PasswordHasher<User>().HashPassword(account, password);
         account.PasswordHash = hashPassword;    
-        userRepository.Add(account);
+        userRepository.AddAsync(account);
     }
     public string Login(string username, string password)
     {

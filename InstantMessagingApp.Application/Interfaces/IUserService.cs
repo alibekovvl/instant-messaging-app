@@ -2,6 +2,6 @@
 
 public interface IUserService
 {
-    void Register(string username, string password);
-    string Login(string username, string password);
+    Task RegisterAsync(string username, string password);
+    Task LoginAsync(string username, string password);
 }

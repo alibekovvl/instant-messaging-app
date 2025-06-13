@@ -28,6 +28,12 @@ public class MessageController(IMessageService service) : ControllerBase
         if (currentUsername == null) return Unauthorized();
         var messages = service.GetContent(currentUsername, username);
         return Ok(messages);
-        
+    }
+
+    [HttpGet("history")]
+    public async Task<IActionResult> GetMessagesHistory([FromQuery] string user1, [FromQuery] string user2)
+    {
+        var messages = await service.GetMessageHistoryAsync(user1, user2);
+        return Ok(messages);
     }
 }

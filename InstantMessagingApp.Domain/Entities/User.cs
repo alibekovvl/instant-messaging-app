@@ -6,5 +6,5 @@ public class User
     public string Username { get; set; }
     public string PasswordHash { get; set; }
     public string? TelegramChatId { get; private set; }
-    
+    public bool IsOnline { get; set; }
 }
