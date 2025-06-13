@@ -13,7 +13,7 @@ public class AuthController(IUserService userService) : ControllerBase
     [HttpPost("register")]
     public IActionResult Register([FromBody] RegisterUserRequest request)
     {
-        userService.Register(request.Username, request.Password);
+        userService.RegisterAsync(request.Username, request.Password);
         return NoContent();
     }
     [HttpPost("login")]
@@ -21,7 +21,7 @@ public class AuthController(IUserService userService) : ControllerBase
     {
         try
         {
-            var token = userService.Login(request.Username, request.Password);
+            var token = userService.LoginAsync(request.Username, request.Password);
             return Ok(token);
         }
         catch 

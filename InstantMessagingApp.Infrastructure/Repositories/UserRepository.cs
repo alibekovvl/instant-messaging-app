@@ -17,5 +17,20 @@ public class UserRepository(AppDbContext dbContext) : IUserRepository
     {
         return await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
     }
-    
+
+    public async Task  UpdateAsync(User? user)
+    {
+        _dbContext.Users.Update(user);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task SetTelegramChatIdAsync(string username, string telegramChatId)
+    {
+        var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+        if (user != null)
+        {
+            user.TelegramChatId = telegramChatId;
+            await _dbContext.SaveChangesAsync();
+        }
+    }
 }

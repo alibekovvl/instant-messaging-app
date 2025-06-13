@@ -17,7 +17,7 @@ public class MessageController(IMessageService service) : ControllerBase
         var reciever = User.FindFirst("userName")?.Value;
         if (request == null) return Unauthorized();
         
-        service.SendMessage(reciever, request); 
+        service.SendMessageAsync(reciever, request); 
         return Ok();
     }
 
@@ -26,7 +26,7 @@ public class MessageController(IMessageService service) : ControllerBase
     {
         var currentUsername = User.FindFirst("userName")?.Value;
         if (currentUsername == null) return Unauthorized();
-        var messages = service.GetContent(currentUsername, username);
+        var messages = service.GetContentAsync(currentUsername, username);
         return Ok(messages);
     }
 

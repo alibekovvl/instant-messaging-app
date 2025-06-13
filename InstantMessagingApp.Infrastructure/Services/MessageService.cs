@@ -21,14 +21,14 @@ public class MessageService(IMessageRepository messageRepository,IUserRepository
         var reciever = await userRepository.GetByUsernameAsync(request.Reciever);
         if (reciever != null && !reciever.IsOnline && !string.IsNullOrEmpty(reciever.TelegramChatId))
         {
-            service.SendNotificationAsync(reciever.TelegramChatId, $"У вас новое сообщение от {sender}");
+           await service.SendNotificationAsync(reciever.TelegramChatId, $"У вас новое сообщение от {sender}");
         }
     }
 
     public async Task<IEnumerable<MessageDto>> GetContentAsync(string user1, string user2)
     {
-        return messageRepository.GetContentAsync(user1, user2)
-            .Select(m => new MessageDto
+        var messages = await messageRepository.GetContentAsync(user1, user2);
+        return messages.Select(m => new MessageDto
             {
                 Sender = m.Sender,
                 Receiver = m.Receiver,
@@ -36,7 +36,6 @@ public class MessageService(IMessageRepository messageRepository,IUserRepository
                 SentAt = m.SentAt
             });
     }
-
     public async Task<List<Message>> GetMessageHistoryAsync(string user1, string user2)
     {
         return await messageRepository.GetMessagesBetweenUsersAsync(user1, user2);

@@ -9,28 +9,30 @@ public class UserService(
     IUserRepository userRepository,
     JwtService jwtService): IUserService
 {
-    public async Task Register(string userName, string password)
+    public async Task RegisterAsync(string userName, string password)
     {
         var account = new User()
         {
             Username = userName,
-            Id = Guid.NewGuid()
+            Id = Guid.NewGuid(),
+            IsOnline = false
         };
 
-        var hashPassword = await new PasswordHasher<User>().HashPassword(account, password);
+        var hashPassword =  new PasswordHasher<User>().HashPassword(account, password);
         account.PasswordHash = hashPassword;    
-        userRepository.AddAsync(account);
+        await userRepository.AddAsync(account);
     }
-    public string Login(string username, string password)
+    public async Task<string> LoginAsync(string username, string password)
     {
-        var account = userRepository.GetByUsername(username);
+        var account = await userRepository.GetByUsernameAsync(username);
         var result = new PasswordHasher<User>()
             .VerifyHashedPassword(account, account.PasswordHash, password);
         
         if (result == PasswordVerificationResult.Success)
         {
+            account.IsOnline = true;
+            await userRepository.UpdateAsync(account);
             return jwtService.GenerateToken(account);
-            
         }
         else
         {
