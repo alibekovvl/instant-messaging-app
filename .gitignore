@@ -5,6 +5,7 @@ Thumbs.db
 # Файлы пользователей и настроек IDE
 .vscode/
 .idea/
+.idea*
 *.suo
 *.user
 *.userosscache
