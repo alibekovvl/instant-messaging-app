@@ -18,10 +18,14 @@ public class MessageService(IMessageRepository messageRepository,IUserRepository
         };
         await messageRepository.AddAsync(message);
         
-        var reciever = await userRepository.GetByUsernameAsync(request.Reciever);
-        if (reciever != null && !reciever.IsOnline && !string.IsNullOrEmpty(reciever.TelegramChatId))
+        var receiver = await userRepository.GetByUsernameAsync(request.Reciever);
+        if (receiver != null && !receiver.IsOnline && !string.IsNullOrEmpty(receiver.TelegramChatId))
         {
-           await service.SendNotificationAsync(reciever.TelegramChatId, $"У вас новое сообщение от {sender}");
+            await service.SendMessageNotificationAsync(
+                receiver.TelegramChatId, 
+                sender, 
+                request.Content
+            ); 
         }
     }
 
