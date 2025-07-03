@@ -12,13 +12,13 @@ public class MessageService(IMessageRepository messageRepository,IUserRepository
         {
             Id = Guid.NewGuid(),
             Sender = sender,
-            Receiver = request.Reciever,
+            Receiver = request.Receiver,
             Content = request.Content,
             SentAt = DateTime.UtcNow,
         };
         await messageRepository.AddAsync(message);
         
-        var receiver = await userRepository.GetByUsernameAsync(request.Reciever);
+        var receiver = await userRepository.GetByUsernameAsync(request.Receiver);
         if (receiver != null && !receiver.IsOnline && !string.IsNullOrEmpty(receiver.TelegramChatId))
         {
             await service.SendMessageNotificationAsync(

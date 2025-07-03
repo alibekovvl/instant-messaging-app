@@ -2,6 +2,6 @@
 
 public class SendMessageRequest
 {
-    public string Reciever { get; set; }
+    public string Receiver { get; set; }
     public string Content { get; set; }
 }

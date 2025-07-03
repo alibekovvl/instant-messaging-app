@@ -33,7 +33,7 @@ public class TelegramNotificationService: ITelegramNotificationService
 
             var chatId = new ChatId(long.Parse(telegramChatId));
             await _botClient.SendTextMessageAsync(
-                chatId: telegramChatId,
+                chatId: chatId,
                 text: telegramMessage,
                 parseMode:
                 ParseMode.Html

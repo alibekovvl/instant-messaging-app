@@ -9,6 +9,7 @@ services:
      - "8080:8080"
     environment:
       DEFAULT_CONNECTION: Host=postgres;Database=ChatMessageDb;Username=postgres;Password=postgres
+      TELEGRAM__BOTTOKEN: ${TELEGRAM__BOTTOKEN}
     env_file:
       - .env
     depends_on:

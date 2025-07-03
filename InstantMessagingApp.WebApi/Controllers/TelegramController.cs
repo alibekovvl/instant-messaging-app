@@ -27,7 +27,6 @@ public class TelegramController :ControllerBase
     [Authorize]
     public async Task<IActionResult> BindTelegram([FromBody] BindTelegramRequest request)
     {
-
         try
         {
             var user = await _userRepository.GetByUsernameAsync(request.Username);
@@ -54,8 +53,6 @@ public class TelegramController :ControllerBase
             _logger.LogError(ex, "Error binding Telegram for user {Username}", request.Username);
             return StatusCode(500, new { message = "Ошибка при привязке Telegram" });
         }
-        
-        return Ok();
     }
     
     [HttpPost("unbind")]
