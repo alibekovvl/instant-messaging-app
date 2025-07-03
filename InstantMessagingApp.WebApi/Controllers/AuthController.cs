@@ -11,17 +11,17 @@ namespace InstantMessagingApp.Controllers;
 public class AuthController(IUserService userService) : ControllerBase
 {
     [HttpPost("register")]
-    public IActionResult Register([FromBody] RegisterUserRequest request)
+    public async Task<IActionResult> Register([FromBody] RegisterUserRequest request)
     {
-        userService.RegisterAsync(request.Username, request.Password);
+        await userService.RegisterAsync(request.Username, request.Password);
         return NoContent();
     }
     [HttpPost("login")]
-    public IActionResult Login([FromBody] LoginUserRequest request)
+    public async Task<IActionResult> Login([FromBody] LoginUserRequest request)
     {
         try
         {
-            var token = userService.LoginAsync(request.Username, request.Password);
+            var token = await  userService.LoginAsync(request.Username, request.Password);
             return Ok(token);
         }
         catch 

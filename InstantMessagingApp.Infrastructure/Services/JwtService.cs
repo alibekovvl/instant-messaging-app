@@ -13,6 +13,7 @@ public class JwtService(IOptions<AuthSettings> options)
     {
         var claims = new List<Claim>()
         {
+            new Claim(ClaimTypes.Name, user.Username), 
             new Claim("userName", user.Username),
             new Claim("id", user.Id.ToString())
         };

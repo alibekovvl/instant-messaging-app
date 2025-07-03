@@ -12,21 +12,21 @@ namespace InstantMessagingApp.Controllers;
 public class MessageController(IMessageService service) : ControllerBase
 {
     [HttpPost("send")]
-    public IActionResult SendMessage([FromBody] SendMessageRequest request)
+    public async Task<IActionResult> SendMessage([FromBody] SendMessageRequest request)
     {
         var reciever = User.FindFirst("userName")?.Value;
         if (request == null) return Unauthorized();
         
-        service.SendMessageAsync(reciever, request); 
+        await service.SendMessageAsync(reciever, request); 
         return Ok();
     }
 
     [HttpGet("{username}")]
-    public IActionResult GetMessages(string username)
+    public async Task<IActionResult> GetMessages(string username)
     {
         var currentUsername = User.FindFirst("userName")?.Value;
         if (currentUsername == null) return Unauthorized();
-        var messages = service.GetContentAsync(currentUsername, username);
+        var messages = await service.GetContentAsync(currentUsername, username);
         return Ok(messages);
     }
 
